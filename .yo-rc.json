@@ -1,0 +1,38 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.crypto.daniel",
+            "nativeLanguage": "en"
+        },
+        "jhipsterVersion": "5.8.2",
+        "applicationType": "monolith",
+        "baseName": "Food24",
+        "packageName": "com.crypto.daniel",
+        "packageFolder": "com/crypto/daniel",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "ehcache",
+        "enableHibernateCache": true,
+        "websocket": false,
+        "databaseType": "sql",
+        "devDatabaseType": "h2Disk",
+        "prodDatabaseType": "postgresql",
+        "searchEngine": "elasticsearch",
+        "messageBroker": false,
+        "serviceDiscoveryType": "eureka",
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "ZmYyM2ZlNDE0MTQzODY1NWZhZDMzY2I3NGIwY2MxMDMyN2RiZGIyMGUyNDIyNWEzMTQwY2ZmNDA5ZDc5YjQ5ODNmYjQyMjcxNWYzNTgxMzNhOGI0N2Y3Zjk3MDNiOTg2ODQ4ZWI3ODgyOWFkZTg5MTQyOTA1MWQzMzAwYjQ2ZTg=",
+        "clientFramework": "angularX",
+        "useSass": false,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["protractor"],
+        "jhiPrefix": "jhi",
+        "entitySuffix": "",
+        "dtoSuffix": "DTO",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "en",
+        "languages": ["en"]
+    }
+}
