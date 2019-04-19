@@ -1,5 +1,9 @@
 # Food24
 
+Food24 was developed as an university project to demonstrate requirements engineering.
+
+The requirements specification / Pflichtenheft can be found [here](https://docs.google.com/document/d/1Iv2Qc9lmAxsNbr6lF4_q0gzUXYWf-3R28dpmBR2gd7M/edit?usp=sharing)
+
 This application was generated using JHipster 5.8.2, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.8.2](https://www.jhipster.tech/documentation-archive/v5.8.2).
 
 ## Development
