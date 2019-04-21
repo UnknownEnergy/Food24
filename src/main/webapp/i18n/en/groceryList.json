@@ -1,0 +1,25 @@
+{
+    "food24App": {
+        "groceryList": {
+            "home": {
+                "title": "Grocery Lists",
+                "createLabel": "Create a new Grocery List",
+                "createOrEditLabel": "Create or edit a Grocery List",
+                "search": "Search for Grocery List"
+            },
+            "created": "A new Grocery List is created with identifier {{ param }}",
+            "updated": "A Grocery List is updated with identifier {{ param }}",
+            "deleted": "A Grocery List is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Grocery List {{ id }}?"
+            },
+            "detail": {
+                "title": "Grocery List"
+            },
+            "name": "Name",
+            "storeItem": "Store Item",
+            "familyMember": "Family Member",
+            "familyGroup": "Family Group"
+        }
+    }
+}

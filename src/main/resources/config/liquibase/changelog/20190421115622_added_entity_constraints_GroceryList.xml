@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity GroceryList.
+    -->
+    <changeSet id="20190421115622-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="grocery_list_id"
+                                 baseTableName="grocery_list_store_item"
+                                 constraintName="fk_grocery_list_store_item_grocery_list_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="grocery_list"/>
+        <addForeignKeyConstraint baseColumnNames="store_item_id"
+                                 baseTableName="grocery_list_store_item"
+                                 constraintName="fk_grocery_list_store_item_store_item_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="store_item"/>
+        
+        <addForeignKeyConstraint baseColumnNames="family_member_id"
+                                 baseTableName="grocery_list"
+                                 constraintName="fk_grocery_list_family_member_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="family_member"/>
+
+        <addForeignKeyConstraint baseColumnNames="family_group_id"
+                                 baseTableName="grocery_list"
+                                 constraintName="fk_grocery_list_family_group_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="family_group"/>
+
+    </changeSet>
+</databaseChangeLog>

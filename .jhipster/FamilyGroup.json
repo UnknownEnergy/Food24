@@ -1,0 +1,37 @@
+{
+    "name": "FamilyGroup",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "groceryList",
+            "otherEntityRelationshipName": "familyGroup",
+            "relationshipName": "groceryList"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "familyMember",
+            "otherEntityRelationshipName": "familyGroup",
+            "relationshipName": "familyMember",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190421115621",
+    "entityTableName": "family_group",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,38 @@
+{
+    "name": "StoreItem",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "storeItemInstance",
+            "otherEntityRelationshipName": "storeItem",
+            "relationshipName": "storeItemInstance",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "groceryList",
+            "otherEntityRelationshipName": "storeItem",
+            "relationshipName": "groceryList",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20190421115623",
+    "entityTableName": "store_item",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

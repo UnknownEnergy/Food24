@@ -1,0 +1,52 @@
+{
+    "name": "FamilyMember",
+    "fields": [
+        {
+            "fieldName": "userName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "groceryList",
+            "otherEntityRelationshipName": "familyMember",
+            "relationshipName": "groceryList"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "familyGroup",
+            "otherEntityRelationshipName": "familyMember",
+            "relationshipName": "familyGroup",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "location",
+            "otherEntityRelationshipName": "familyMember",
+            "relationshipName": "location",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190421115627",
+    "entityTableName": "family_member",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

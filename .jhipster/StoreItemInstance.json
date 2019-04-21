@@ -1,0 +1,38 @@
+{
+    "name": "StoreItemInstance",
+    "fields": [
+        {
+            "fieldName": "price",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "storeItem",
+            "otherEntityRelationshipName": "storeItemInstance",
+            "relationshipName": "storeItem",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "store",
+            "otherEntityRelationshipName": "storeItemInstance",
+            "relationshipName": "store",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190421115624",
+    "entityTableName": "store_item_instance",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

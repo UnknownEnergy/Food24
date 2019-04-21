@@ -1,0 +1,24 @@
+{
+    "food24App": {
+        "storeItemInstance": {
+            "home": {
+                "title": "Store Item Instances",
+                "createLabel": "Create a new Store Item Instance",
+                "createOrEditLabel": "Create or edit a Store Item Instance",
+                "search": "Search for Store Item Instance"
+            },
+            "created": "A new Store Item Instance is created with identifier {{ param }}",
+            "updated": "A Store Item Instance is updated with identifier {{ param }}",
+            "deleted": "A Store Item Instance is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Store Item Instance {{ id }}?"
+            },
+            "detail": {
+                "title": "Store Item Instance"
+            },
+            "price": "Price",
+            "storeItem": "Store Item",
+            "store": "Store"
+        }
+    }
+}

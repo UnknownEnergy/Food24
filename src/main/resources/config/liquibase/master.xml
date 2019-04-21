@@ -5,6 +5,17 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115621_added_entity_FamilyGroup.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115622_added_entity_GroceryList.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115623_added_entity_StoreItem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115624_added_entity_StoreItemInstance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115625_added_entity_Store.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115626_added_entity_Location.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115627_added_entity_FamilyMember.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190421115622_added_entity_constraints_GroceryList.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115624_added_entity_constraints_StoreItemInstance.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115625_added_entity_constraints_Store.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190421115627_added_entity_constraints_FamilyMember.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

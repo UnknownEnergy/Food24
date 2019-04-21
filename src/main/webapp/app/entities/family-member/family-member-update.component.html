@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-family-member-heading" jhiTranslate="food24App.familyMember.home.createOrEditLabel">Create or edit a Family Member</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!familyMember.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="familyMember.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="food24App.familyMember.userName" for="field_userName">User Name</label>
+                    <input type="text" class="form-control" name="userName" id="field_userName"
+                        [(ngModel)]="familyMember.userName" required/>
+                    <div [hidden]="!(editForm.controls.userName?.dirty && editForm.controls.userName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.userName?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="food24App.familyMember.firstName" for="field_firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                        [(ngModel)]="familyMember.firstName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="food24App.familyMember.lastName" for="field_lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                        [(ngModel)]="familyMember.lastName" />
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="food24App.familyMember.familyGroup" for="field_familyGroup">Family Group</label>
+                    <select class="form-control" id="field_familyGroup" multiple name="familyGroup" [(ngModel)]="familyMember.familyGroups">
+                        <option [ngValue]="getSelected(familyMember.familyGroups, familyGroupOption)" *ngFor="let familyGroupOption of familygroups; trackBy: trackFamilyGroupById">{{familyGroupOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="food24App.familyMember.location" for="field_location">Location</label>
+                    <select class="form-control" id="field_location" name="location" [(ngModel)]="familyMember.locationId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{
+    "food24App": {
+        "familyGroup": {
+            "home": {
+                "title": "Family Groups",
+                "createLabel": "Create a new Family Group",
+                "createOrEditLabel": "Create or edit a Family Group",
+                "search": "Search for Family Group"
+            },
+            "created": "A new Family Group is created with identifier {{ param }}",
+            "updated": "A Family Group is updated with identifier {{ param }}",
+            "deleted": "A Family Group is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Family Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Family Group"
+            },
+            "name": "Name",
+            "groceryList": "Grocery List",
+            "familyMember": "Family Member"
+        }
+    }
+}

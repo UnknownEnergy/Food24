@@ -1,0 +1,47 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="familyMember">
+            <h2><span jhiTranslate="food24App.familyMember.detail.title">Family Member</span> {{familyMember.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="food24App.familyMember.userName">User Name</span></dt>
+                <dd>
+                    <span>{{familyMember.userName}}</span>
+                </dd>
+                <dt><span jhiTranslate="food24App.familyMember.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{familyMember.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="food24App.familyMember.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{familyMember.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="food24App.familyMember.familyGroup">Family Group</span></dt>
+                <dd>
+                    <span *ngFor="let familyGroup of familyMember.familyGroups; let last = last">
+                        <a [routerLink]="['/family-group', familyGroup?.id, 'view' ]">{{familyGroup.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="food24App.familyMember.location">Location</span></dt>
+                <dd>
+                    <div *ngIf="familyMember.locationId">
+                        <a [routerLink]="['/location', familyMember.locationId, 'view']">{{familyMember.locationId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/family-member', familyMember.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

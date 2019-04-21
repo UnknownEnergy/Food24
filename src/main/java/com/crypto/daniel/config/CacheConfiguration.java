@@ -41,6 +41,22 @@ public class CacheConfiguration {
             cm.createCache(com.crypto.daniel.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.crypto.daniel.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.crypto.daniel.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.FamilyGroup.class.getName(), jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.FamilyGroup.class.getName() + ".groceryLists", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.FamilyGroup.class.getName() + ".familyMembers", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.GroceryList.class.getName(), jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.GroceryList.class.getName() + ".storeItems", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.StoreItem.class.getName(), jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.StoreItem.class.getName() + ".groceryLists", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.StoreItemInstance.class.getName(), jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.Store.class.getName(), jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.Store.class.getName() + ".storeItemInstances", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.Location.class.getName(), jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.Location.class.getName() + ".familyMembers", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.Location.class.getName() + ".stores", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.FamilyMember.class.getName(), jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.FamilyMember.class.getName() + ".groceryLists", jcacheConfiguration);
+            cm.createCache(com.crypto.daniel.domain.FamilyMember.class.getName() + ".familyGroups", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

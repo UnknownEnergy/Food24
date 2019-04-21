@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="groceryList">
+            <h2><span jhiTranslate="food24App.groceryList.detail.title">Grocery List</span> {{groceryList.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="food24App.groceryList.name">Name</span></dt>
+                <dd>
+                    <span>{{groceryList.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="food24App.groceryList.storeItem">Store Item</span></dt>
+                <dd>
+                    <span *ngFor="let storeItem of groceryList.storeItems; let last = last">
+                        <a [routerLink]="['/store-item', storeItem?.id, 'view' ]">{{storeItem.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+                <dt><span jhiTranslate="food24App.groceryList.familyMember">Family Member</span></dt>
+                <dd>
+                    <div *ngIf="groceryList.familyMemberId">
+                        <a [routerLink]="['/family-member', groceryList.familyMemberId, 'view']">{{groceryList.familyMemberId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="food24App.groceryList.familyGroup">Family Group</span></dt>
+                <dd>
+                    <div *ngIf="groceryList.familyGroupId">
+                        <a [routerLink]="['/family-group', groceryList.familyGroupId, 'view']">{{groceryList.familyGroupId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/grocery-list', groceryList.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

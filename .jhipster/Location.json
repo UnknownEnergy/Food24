@@ -1,0 +1,46 @@
+{
+    "name": "Location",
+    "fields": [
+        {
+            "fieldName": "latitude",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "familyMember",
+            "otherEntityRelationshipName": "location",
+            "relationshipName": "familyMember"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "store",
+            "otherEntityRelationshipName": "location",
+            "relationshipName": "store"
+        }
+    ],
+    "changelogDate": "20190421115626",
+    "entityTableName": "location",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
