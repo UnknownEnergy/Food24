@@ -18,6 +18,7 @@ import { Food24HomeModule } from './home/home.module';
 import { Food24AccountModule } from './account/account.module';
 import { Food24EntityModule } from './entities/entity.module';
 import * as moment from 'moment';
+import { Food24AppMapModule } from './map/map.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
@@ -36,6 +37,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
         Food24CoreModule,
         Food24HomeModule,
         Food24AccountModule,
+        Food24AppMapModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         Food24EntityModule,
         Food24AppRoutingModule
