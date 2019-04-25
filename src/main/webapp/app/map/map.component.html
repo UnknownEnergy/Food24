@@ -2,10 +2,13 @@
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
-    <agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'">
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="5">
+    <agm-marker [latitude]="lat" [longitude]="lng" [label]="'YOU'">
+    </agm-marker>
+
+    <agm-marker *ngFor="let location of locations" [latitude]="location.latitude" [longitude]="location.longitude" [label]="'X'">
         <agm-info-window [disableAutoPan]="true">
-            Hi, this is the content of the <strong>info window</strong>
+            <a [routerLink]="['/location', location.id, 'view' ]">{{location.description}}</a>
         </agm-info-window>
     </agm-marker>
 </agm-map>

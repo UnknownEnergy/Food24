@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ILocation } from 'app/shared/model/location.model';
+import { filter, map } from 'rxjs/operators';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { LocationService } from 'app/entities/location';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-map',
@@ -7,12 +12,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapComponent implements OnInit {
     title: string;
-    lat: number = 47.073148;
-    lng: number = 15.417011;
+    lat: number;
+    lng: number;
+    locations: ILocation[];
 
-    constructor() {
-        this.title = 'MapComponent message';
+    constructor(protected jhiAlertService: JhiAlertService, protected locationService: LocationService) {
+        if (navigator) {
+            navigator.geolocation.getCurrentPosition(pos => {
+                this.lng = +pos.coords.longitude;
+                this.lat = +pos.coords.latitude;
+            });
+        }
+        this.title = 'Maps';
+    }
+    ngOnInit() {
+        this.loadAll();
     }
 
-    ngOnInit() {}
+    loadAll() {
+        this.locationService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<ILocation[]>) => res.ok),
+                map((res: HttpResponse<ILocation[]>) => res.body)
+            )
+            .subscribe(
+                (res: ILocation[]) => {
+                    this.locations = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+    }
+
+    protected onError(errorMessage: string) {
+        this.jhiAlertService.error(errorMessage, null, null);
+    }
 }
