@@ -6,6 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IFamilyMember } from 'app/shared/model/family-member.model';
 import { FamilyMemberService } from './family-member.service';
+import { IUser, UserService } from 'app/core';
 import { IFamilyGroup } from 'app/shared/model/family-group.model';
 import { FamilyGroupService } from 'app/entities/family-group';
 import { ILocation } from 'app/shared/model/location.model';
@@ -19,6 +20,8 @@ export class FamilyMemberUpdateComponent implements OnInit {
     familyMember: IFamilyMember;
     isSaving: boolean;
 
+    users: IUser[];
+
     familygroups: IFamilyGroup[];
 
     locations: ILocation[];
@@ -26,6 +29,7 @@ export class FamilyMemberUpdateComponent implements OnInit {
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected familyMemberService: FamilyMemberService,
+        protected userService: UserService,
         protected familyGroupService: FamilyGroupService,
         protected locationService: LocationService,
         protected activatedRoute: ActivatedRoute
@@ -36,6 +40,13 @@ export class FamilyMemberUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ familyMember }) => {
             this.familyMember = familyMember;
         });
+        this.userService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IUser[]>) => response.body)
+            )
+            .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.familyGroupService
             .query()
             .pipe(
@@ -80,6 +91,10 @@ export class FamilyMemberUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackUserById(index: number, item: IUser) {
+        return item.id;
     }
 
     trackFamilyGroupById(index: number, item: IFamilyGroup) {

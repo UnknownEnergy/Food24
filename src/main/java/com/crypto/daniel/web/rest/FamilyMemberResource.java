@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -44,7 +43,7 @@ public class FamilyMemberResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/family-members")
-    public ResponseEntity<FamilyMemberDTO> createFamilyMember(@Valid @RequestBody FamilyMemberDTO familyMemberDTO) throws URISyntaxException {
+    public ResponseEntity<FamilyMemberDTO> createFamilyMember(@RequestBody FamilyMemberDTO familyMemberDTO) throws URISyntaxException {
         log.debug("REST request to save FamilyMember : {}", familyMemberDTO);
         if (familyMemberDTO.getId() != null) {
             throw new BadRequestAlertException("A new familyMember cannot already have an ID", ENTITY_NAME, "idexists");
@@ -65,7 +64,7 @@ public class FamilyMemberResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/family-members")
-    public ResponseEntity<FamilyMemberDTO> updateFamilyMember(@Valid @RequestBody FamilyMemberDTO familyMemberDTO) throws URISyntaxException {
+    public ResponseEntity<FamilyMemberDTO> updateFamilyMember(@RequestBody FamilyMemberDTO familyMemberDTO) throws URISyntaxException {
         log.debug("REST request to update FamilyMember : {}", familyMemberDTO);
         if (familyMemberDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

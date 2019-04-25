@@ -17,6 +17,9 @@ import java.util.Optional;
 @Repository
 public interface FamilyMemberRepository extends JpaRepository<FamilyMember, Long> {
 
+    @Query("select family_member from FamilyMember family_member where family_member.user.login = ?#{principal.username}")
+    List<FamilyMember> findByUserIsCurrentUser();
+
     @Query(value = "select distinct family_member from FamilyMember family_member left join fetch family_member.familyGroups",
         countQuery = "select count(distinct family_member) from FamilyMember family_member")
     Page<FamilyMember> findAllWithEagerRelationships(Pageable pageable);

@@ -9,28 +9,14 @@
                     <input type="text" class="form-control" id="id" name="id"
                         [(ngModel)]="familyMember.id" readonly />
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="food24App.familyMember.userName" for="field_userName">User Name</label>
-                    <input type="text" class="form-control" name="userName" id="field_userName"
-                        [(ngModel)]="familyMember.userName" required/>
-                    <div [hidden]="!(editForm.controls.userName?.dirty && editForm.controls.userName?.invalid)">
-                        <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.userName?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="food24App.familyMember.firstName" for="field_firstName">First Name</label>
-                    <input type="text" class="form-control" name="firstName" id="field_firstName"
-                        [(ngModel)]="familyMember.firstName" />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="food24App.familyMember.lastName" for="field_lastName">Last Name</label>
-                    <input type="text" class="form-control" name="lastName" id="field_lastName"
-                        [(ngModel)]="familyMember.lastName" />
-                </div>
 
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="food24App.familyMember.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" [(ngModel)]="familyMember.userId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <label jhiTranslate="food24App.familyMember.familyGroup" for="field_familyGroup">Family Group</label>
                     <select class="form-control" id="field_familyGroup" multiple name="familyGroup" [(ngModel)]="familyMember.familyGroups">

@@ -3,10 +3,8 @@ import { IFamilyGroup } from 'app/shared/model/family-group.model';
 
 export interface IFamilyMember {
     id?: number;
-    userName?: string;
-    firstName?: string;
-    lastName?: string;
     groceryLists?: IGroceryList[];
+    userId?: number;
     familyGroups?: IFamilyGroup[];
     locationId?: number;
 }
@@ -14,10 +12,8 @@ export interface IFamilyMember {
 export class FamilyMember implements IFamilyMember {
     constructor(
         public id?: number,
-        public userName?: string,
-        public firstName?: string,
-        public lastName?: string,
         public groceryLists?: IGroceryList[],
+        public userId?: number,
         public familyGroups?: IFamilyGroup[],
         public locationId?: number
     ) {}

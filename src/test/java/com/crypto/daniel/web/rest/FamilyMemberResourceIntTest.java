@@ -51,15 +51,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Food24App.class)
 public class FamilyMemberResourceIntTest {
 
-    private static final String DEFAULT_USER_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_USER_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_FIRST_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_FIRST_NAME = "BBBBBBBBBB";
-
-    private static final String DEFAULT_LAST_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_NAME = "BBBBBBBBBB";
-
     @Autowired
     private FamilyMemberRepository familyMemberRepository;
 
@@ -121,10 +112,7 @@ public class FamilyMemberResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static FamilyMember createEntity(EntityManager em) {
-        FamilyMember familyMember = new FamilyMember()
-            .userName(DEFAULT_USER_NAME)
-            .firstName(DEFAULT_FIRST_NAME)
-            .lastName(DEFAULT_LAST_NAME);
+        FamilyMember familyMember = new FamilyMember();
         return familyMember;
     }
 
@@ -149,9 +137,6 @@ public class FamilyMemberResourceIntTest {
         List<FamilyMember> familyMemberList = familyMemberRepository.findAll();
         assertThat(familyMemberList).hasSize(databaseSizeBeforeCreate + 1);
         FamilyMember testFamilyMember = familyMemberList.get(familyMemberList.size() - 1);
-        assertThat(testFamilyMember.getUserName()).isEqualTo(DEFAULT_USER_NAME);
-        assertThat(testFamilyMember.getFirstName()).isEqualTo(DEFAULT_FIRST_NAME);
-        assertThat(testFamilyMember.getLastName()).isEqualTo(DEFAULT_LAST_NAME);
 
         // Validate the FamilyMember in Elasticsearch
         verify(mockFamilyMemberSearchRepository, times(1)).save(testFamilyMember);
@@ -182,25 +167,6 @@ public class FamilyMemberResourceIntTest {
 
     @Test
     @Transactional
-    public void checkUserNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = familyMemberRepository.findAll().size();
-        // set the field null
-        familyMember.setUserName(null);
-
-        // Create the FamilyMember, which fails.
-        FamilyMemberDTO familyMemberDTO = familyMemberMapper.toDto(familyMember);
-
-        restFamilyMemberMockMvc.perform(post("/api/family-members")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(familyMemberDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<FamilyMember> familyMemberList = familyMemberRepository.findAll();
-        assertThat(familyMemberList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllFamilyMembers() throws Exception {
         // Initialize the database
         familyMemberRepository.saveAndFlush(familyMember);
@@ -209,10 +175,7 @@ public class FamilyMemberResourceIntTest {
         restFamilyMemberMockMvc.perform(get("/api/family-members?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(familyMember.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
-            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME.toString())))
-            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME.toString())));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(familyMember.getId().intValue())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -258,10 +221,7 @@ public class FamilyMemberResourceIntTest {
         restFamilyMemberMockMvc.perform(get("/api/family-members/{id}", familyMember.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(familyMember.getId().intValue()))
-            .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
-            .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME.toString()))
-            .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME.toString()));
+            .andExpect(jsonPath("$.id").value(familyMember.getId().intValue()));
     }
 
     @Test
@@ -284,10 +244,6 @@ public class FamilyMemberResourceIntTest {
         FamilyMember updatedFamilyMember = familyMemberRepository.findById(familyMember.getId()).get();
         // Disconnect from session so that the updates on updatedFamilyMember are not directly saved in db
         em.detach(updatedFamilyMember);
-        updatedFamilyMember
-            .userName(UPDATED_USER_NAME)
-            .firstName(UPDATED_FIRST_NAME)
-            .lastName(UPDATED_LAST_NAME);
         FamilyMemberDTO familyMemberDTO = familyMemberMapper.toDto(updatedFamilyMember);
 
         restFamilyMemberMockMvc.perform(put("/api/family-members")
@@ -299,9 +255,6 @@ public class FamilyMemberResourceIntTest {
         List<FamilyMember> familyMemberList = familyMemberRepository.findAll();
         assertThat(familyMemberList).hasSize(databaseSizeBeforeUpdate);
         FamilyMember testFamilyMember = familyMemberList.get(familyMemberList.size() - 1);
-        assertThat(testFamilyMember.getUserName()).isEqualTo(UPDATED_USER_NAME);
-        assertThat(testFamilyMember.getFirstName()).isEqualTo(UPDATED_FIRST_NAME);
-        assertThat(testFamilyMember.getLastName()).isEqualTo(UPDATED_LAST_NAME);
 
         // Validate the FamilyMember in Elasticsearch
         verify(mockFamilyMemberSearchRepository, times(1)).save(testFamilyMember);
@@ -361,10 +314,7 @@ public class FamilyMemberResourceIntTest {
         restFamilyMemberMockMvc.perform(get("/api/_search/family-members?query=id:" + familyMember.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(familyMember.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME)))
-            .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
-            .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)));
+            .andExpect(jsonPath("$.[*].id").value(hasItem(familyMember.getId().intValue())));
     }
 
     @Test

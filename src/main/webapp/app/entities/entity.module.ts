@@ -31,6 +31,10 @@ import { RouterModule } from '@angular/router';
             {
                 path: 'family-member',
                 loadChildren: './family-member/family-member.module#Food24FamilyMemberModule'
+            },
+            {
+                path: 'family-member',
+                loadChildren: './family-member/family-member.module#Food24FamilyMemberModule'
             }
             /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
         ])

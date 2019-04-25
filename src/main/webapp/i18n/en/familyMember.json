@@ -16,10 +16,8 @@
             "detail": {
                 "title": "Family Member"
             },
-            "userName": "User Name",
-            "firstName": "First Name",
-            "lastName": "Last Name",
             "groceryList": "Grocery List",
+            "user": "User",
             "familyGroup": "Family Group",
             "location": "Location"
         }

@@ -26,9 +26,7 @@ export class FamilyMemberUpdatePage {
     pageTitle = element(by.id('jhi-family-member-heading'));
     saveButton = element(by.id('save-entity'));
     cancelButton = element(by.id('cancel-save'));
-    userNameInput = element(by.id('field_userName'));
-    firstNameInput = element(by.id('field_firstName'));
-    lastNameInput = element(by.id('field_lastName'));
+    userSelect = element(by.id('field_user'));
     familyGroupSelect = element(by.id('field_familyGroup'));
     locationSelect = element(by.id('field_location'));
 
@@ -36,28 +34,23 @@ export class FamilyMemberUpdatePage {
         return this.pageTitle.getAttribute('jhiTranslate');
     }
 
-    async setUserNameInput(userName) {
-        await this.userNameInput.sendKeys(userName);
+    async userSelectLastOption() {
+        await this.userSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
     }
 
-    async getUserNameInput() {
-        return this.userNameInput.getAttribute('value');
+    async userSelectOption(option) {
+        await this.userSelect.sendKeys(option);
     }
 
-    async setFirstNameInput(firstName) {
-        await this.firstNameInput.sendKeys(firstName);
+    getUserSelect(): ElementFinder {
+        return this.userSelect;
     }
 
-    async getFirstNameInput() {
-        return this.firstNameInput.getAttribute('value');
-    }
-
-    async setLastNameInput(lastName) {
-        await this.lastNameInput.sendKeys(lastName);
-    }
-
-    async getLastNameInput() {
-        return this.lastNameInput.getAttribute('value');
+    async getUserSelectedOption() {
+        return this.userSelect.element(by.css('option:checked')).getText();
     }
 
     async familyGroupSelectLastOption() {

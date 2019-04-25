@@ -1,28 +1,19 @@
 {
     "name": "FamilyMember",
-    "fields": [
-        {
-            "fieldName": "userName",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "firstName",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "lastName",
-            "fieldType": "String"
-        }
-    ],
+    "fields": [],
     "relationships": [
         {
             "relationshipType": "one-to-many",
             "otherEntityName": "groceryList",
             "otherEntityRelationshipName": "familyMember",
             "relationshipName": "groceryList"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "familyMember",
+            "relationshipName": "user",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-many",

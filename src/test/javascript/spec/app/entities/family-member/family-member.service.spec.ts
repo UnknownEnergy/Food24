@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(FamilyMemberService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new FamilyMember(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new FamilyMember(0);
         });
 
         describe('Service methods', async () => {
@@ -53,14 +53,7 @@ describe('Service Tests', () => {
             });
 
             it('should update a FamilyMember', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        userName: 'BBBBBB',
-                        firstName: 'BBBBBB',
-                        lastName: 'BBBBBB'
-                    },
-                    elemDefault
-                );
+                const returnedFromService = Object.assign({}, elemDefault);
 
                 const expected = Object.assign({}, returnedFromService);
                 service
@@ -72,14 +65,7 @@ describe('Service Tests', () => {
             });
 
             it('should return a list of FamilyMember', async () => {
-                const returnedFromService = Object.assign(
-                    {
-                        userName: 'BBBBBB',
-                        firstName: 'BBBBBB',
-                        lastName: 'BBBBBB'
-                    },
-                    elemDefault
-                );
+                const returnedFromService = Object.assign({}, elemDefault);
                 const expected = Object.assign({}, returnedFromService);
                 service
                     .query(expected)

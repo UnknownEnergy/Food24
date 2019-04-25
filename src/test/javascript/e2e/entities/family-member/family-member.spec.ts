@@ -40,15 +40,10 @@ describe('FamilyMember e2e test', () => {
 
         await familyMemberComponentsPage.clickOnCreateButton();
         await promise.all([
-            familyMemberUpdatePage.setUserNameInput('userName'),
-            familyMemberUpdatePage.setFirstNameInput('firstName'),
-            familyMemberUpdatePage.setLastNameInput('lastName'),
+            familyMemberUpdatePage.userSelectLastOption(),
             // familyMemberUpdatePage.familyGroupSelectLastOption(),
             familyMemberUpdatePage.locationSelectLastOption()
         ]);
-        expect(await familyMemberUpdatePage.getUserNameInput()).to.eq('userName');
-        expect(await familyMemberUpdatePage.getFirstNameInput()).to.eq('firstName');
-        expect(await familyMemberUpdatePage.getLastNameInput()).to.eq('lastName');
         await familyMemberUpdatePage.save();
         expect(await familyMemberUpdatePage.getSaveButton().isPresent()).to.be.false;
 

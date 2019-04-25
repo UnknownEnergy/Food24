@@ -30,9 +30,7 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="food24App.familyMember.userName">User Name</span></th>
-            <th><span jhiTranslate="food24App.familyMember.firstName">First Name</span></th>
-            <th><span jhiTranslate="food24App.familyMember.lastName">Last Name</span></th>
+            <th><span jhiTranslate="food24App.familyMember.user">User</span></th>
             <th><span jhiTranslate="food24App.familyMember.familyGroup">Family Group</span></th>
             <th><span jhiTranslate="food24App.familyMember.location">Location</span></th>
             <th></th>
@@ -41,9 +39,9 @@
             <tbody>
             <tr *ngFor="let familyMember of familyMembers ;trackBy: trackId">
                 <td><a [routerLink]="['/family-member', familyMember.id, 'view' ]">{{familyMember.id}}</a></td>
-                <td>{{familyMember.userName}}</td>
-                <td>{{familyMember.firstName}}</td>
-                <td>{{familyMember.lastName}}</td>
+                <td>
+                    {{familyMember.userId}}
+                </td>
                 <td>
                     <span *ngFor="let familyGroup of familyMember.familyGroups; let last = last">
                             <a class="form-control-static" [routerLink]="['../family-group', familyGroup?.id, 'view' ]">{{familyGroup.id}}</a>{{last ? '' : ', '}}

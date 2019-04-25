@@ -1,5 +1,4 @@
 package com.crypto.daniel.service.dto;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,13 +11,8 @@ public class FamilyMemberDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
-    private String userName;
 
-    private String firstName;
-
-    private String lastName;
-
+    private Long userId;
 
     private Set<FamilyGroupDTO> familyGroups = new HashSet<>();
 
@@ -32,28 +26,12 @@ public class FamilyMemberDTO implements Serializable {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Set<FamilyGroupDTO> getFamilyGroups() {
@@ -97,9 +75,7 @@ public class FamilyMemberDTO implements Serializable {
     public String toString() {
         return "FamilyMemberDTO{" +
             "id=" + getId() +
-            ", userName='" + getUserName() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
+            ", user=" + getUserId() +
             ", location=" + getLocationId() +
             "}";
     }

@@ -7,7 +7,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
@@ -31,19 +30,13 @@ public class FamilyMember implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
     @OneToMany(mappedBy = "familyMember")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<GroceryList> groceryLists = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("familyMembers")
+    private User user;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "family_member_family_group",
@@ -62,45 +55,6 @@ public class FamilyMember implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public FamilyMember userName(String userName) {
-        this.userName = userName;
-        return this;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public FamilyMember firstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public FamilyMember lastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Set<GroceryList> getGroceryLists() {
@@ -126,6 +80,19 @@ public class FamilyMember implements Serializable {
 
     public void setGroceryLists(Set<GroceryList> groceryLists) {
         this.groceryLists = groceryLists;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public FamilyMember user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<FamilyGroup> getFamilyGroups() {
@@ -191,9 +158,6 @@ public class FamilyMember implements Serializable {
     public String toString() {
         return "FamilyMember{" +
             "id=" + getId() +
-            ", userName='" + getUserName() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
             "}";
     }
 }
