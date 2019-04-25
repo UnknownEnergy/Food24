@@ -1,11 +1,11 @@
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
-    <h6 class="text-right">{{message}}</h6>
-    <h1 class="text-capitalize text-center" jhiTranslate="map.title">Title</h1>
-    <h5 class="text-center" jhiTranslate="map.subtitle">Subtitle</h5>
-    <hr/>
-    <p class="text-justify" jhiTranslate="map.content">Content</p>
-  </div>
-  <div class="col-md-1"></div>
-</div>
+<h1>{{ title }}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+    <agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'">
+        <agm-info-window [disableAutoPan]="true">
+            Hi, this is the content of the <strong>info window</strong>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>

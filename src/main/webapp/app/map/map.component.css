@@ -1,1 +1,4 @@
 /* map.component.css */
+agm-map {
+    height: 700px;
+}
