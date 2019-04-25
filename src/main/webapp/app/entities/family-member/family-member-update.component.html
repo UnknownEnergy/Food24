@@ -14,20 +14,20 @@
                     <label class="form-control-label" jhiTranslate="food24App.familyMember.user" for="field_user">User</label>
                     <select class="form-control" id="field_user" name="user" [(ngModel)]="familyMember.userId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label jhiTranslate="food24App.familyMember.familyGroup" for="field_familyGroup">Family Group</label>
                     <select class="form-control" id="field_familyGroup" multiple name="familyGroup" [(ngModel)]="familyMember.familyGroups">
-                        <option [ngValue]="getSelected(familyMember.familyGroups, familyGroupOption)" *ngFor="let familyGroupOption of familygroups; trackBy: trackFamilyGroupById">{{familyGroupOption.id}}</option>
+                        <option [ngValue]="getSelected(familyMember.familyGroups, familyGroupOption)" *ngFor="let familyGroupOption of familygroups; trackBy: trackFamilyGroupById">{{familyGroupOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="food24App.familyMember.location" for="field_location">Location</label>
                     <select class="form-control" id="field_location" name="location" [(ngModel)]="familyMember.locationId" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.id}}</option>
+                        <option [ngValue]="locationOption.id" *ngFor="let locationOption of locations; trackBy: trackLocationById">{{locationOption.description}}</option>
                     </select>
                 </div>
             </div>

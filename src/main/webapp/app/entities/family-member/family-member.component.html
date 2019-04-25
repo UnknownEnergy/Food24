@@ -40,16 +40,16 @@
             <tr *ngFor="let familyMember of familyMembers ;trackBy: trackId">
                 <td><a [routerLink]="['/family-member', familyMember.id, 'view' ]">{{familyMember.id}}</a></td>
                 <td>
-                    {{familyMember.userId}}
+                    {{familyMember.userLogin}}
                 </td>
                 <td>
                     <span *ngFor="let familyGroup of familyMember.familyGroups; let last = last">
-                            <a class="form-control-static" [routerLink]="['../family-group', familyGroup?.id, 'view' ]">{{familyGroup.id}}</a>{{last ? '' : ', '}}
+                            <a class="form-control-static" [routerLink]="['../family-group', familyGroup?.id, 'view' ]">{{familyGroup.name}}</a>{{last ? '' : ', '}}
                         </span>
                 </td>
                 <td>
                     <div *ngIf="familyMember.locationId">
-                        <a [routerLink]="['../location', familyMember.locationId , 'view' ]" >{{familyMember.locationId}}</a>
+                        <a [routerLink]="['../location', familyMember.locationId , 'view' ]" >{{familyMember.locationDescription}}</a>
                     </div>
                 </td>
                 <td class="text-right">

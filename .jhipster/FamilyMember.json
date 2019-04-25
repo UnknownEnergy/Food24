@@ -13,14 +13,14 @@
             "otherEntityName": "user",
             "otherEntityRelationshipName": "familyMember",
             "relationshipName": "user",
-            "otherEntityField": "id"
+            "otherEntityField": "login"
         },
         {
             "relationshipType": "many-to-many",
             "otherEntityName": "familyGroup",
             "otherEntityRelationshipName": "familyMember",
             "relationshipName": "familyGroup",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         },
         {
@@ -28,7 +28,7 @@
             "otherEntityName": "location",
             "otherEntityRelationshipName": "familyMember",
             "relationshipName": "location",
-            "otherEntityField": "id"
+            "otherEntityField": "description"
         }
     ],
     "changelogDate": "20190421115627",

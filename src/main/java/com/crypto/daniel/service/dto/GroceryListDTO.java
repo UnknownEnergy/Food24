@@ -18,9 +18,11 @@ public class GroceryListDTO implements Serializable {
 
     private Set<StoreItemDTO> storeItems = new HashSet<>();
 
-    private Long familyMemberId;
-
     private Long familyGroupId;
+
+    private String familyGroupName;
+
+    private Long familyMemberId;
 
     public Long getId() {
         return id;
@@ -46,20 +48,28 @@ public class GroceryListDTO implements Serializable {
         this.storeItems = storeItems;
     }
 
-    public Long getFamilyMemberId() {
-        return familyMemberId;
-    }
-
-    public void setFamilyMemberId(Long familyMemberId) {
-        this.familyMemberId = familyMemberId;
-    }
-
     public Long getFamilyGroupId() {
         return familyGroupId;
     }
 
     public void setFamilyGroupId(Long familyGroupId) {
         this.familyGroupId = familyGroupId;
+    }
+
+    public String getFamilyGroupName() {
+        return familyGroupName;
+    }
+
+    public void setFamilyGroupName(String familyGroupName) {
+        this.familyGroupName = familyGroupName;
+    }
+
+    public Long getFamilyMemberId() {
+        return familyMemberId;
+    }
+
+    public void setFamilyMemberId(Long familyMemberId) {
+        this.familyMemberId = familyMemberId;
     }
 
     @Override
@@ -88,8 +98,9 @@ public class GroceryListDTO implements Serializable {
         return "GroceryListDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", familyMember=" + getFamilyMemberId() +
             ", familyGroup=" + getFamilyGroupId() +
+            ", familyGroup='" + getFamilyGroupName() + "'" +
+            ", familyMember=" + getFamilyMemberId() +
             "}";
     }
 }

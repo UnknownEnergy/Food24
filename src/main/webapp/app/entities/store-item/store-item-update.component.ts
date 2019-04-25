@@ -6,8 +6,6 @@ import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
 import { IStoreItem } from 'app/shared/model/store-item.model';
 import { StoreItemService } from './store-item.service';
-import { IStoreItemInstance } from 'app/shared/model/store-item-instance.model';
-import { StoreItemInstanceService } from 'app/entities/store-item-instance';
 import { IGroceryList } from 'app/shared/model/grocery-list.model';
 import { GroceryListService } from 'app/entities/grocery-list';
 
@@ -19,14 +17,11 @@ export class StoreItemUpdateComponent implements OnInit {
     storeItem: IStoreItem;
     isSaving: boolean;
 
-    storeiteminstances: IStoreItemInstance[];
-
     grocerylists: IGroceryList[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected storeItemService: StoreItemService,
-        protected storeItemInstanceService: StoreItemInstanceService,
         protected groceryListService: GroceryListService,
         protected activatedRoute: ActivatedRoute
     ) {}
@@ -36,16 +31,6 @@ export class StoreItemUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ storeItem }) => {
             this.storeItem = storeItem;
         });
-        this.storeItemInstanceService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IStoreItemInstance[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IStoreItemInstance[]>) => response.body)
-            )
-            .subscribe(
-                (res: IStoreItemInstance[]) => (this.storeiteminstances = res),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
         this.groceryListService
             .query()
             .pipe(
@@ -83,10 +68,6 @@ export class StoreItemUpdateComponent implements OnInit {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackStoreItemInstanceById(index: number, item: IStoreItemInstance) {
-        return item.id;
     }
 
     trackGroceryListById(index: number, item: IGroceryList) {

@@ -32,8 +32,8 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="food24App.groceryList.name">Name</span></th>
             <th><span jhiTranslate="food24App.groceryList.storeItem">Store Item</span></th>
-            <th><span jhiTranslate="food24App.groceryList.familyMember">Family Member</span></th>
             <th><span jhiTranslate="food24App.groceryList.familyGroup">Family Group</span></th>
+            <th><span jhiTranslate="food24App.groceryList.familyMember">Family Member</span></th>
             <th></th>
             </tr>
             </thead>
@@ -43,17 +43,17 @@
                 <td>{{groceryList.name}}</td>
                 <td>
                     <span *ngFor="let storeItem of groceryList.storeItems; let last = last">
-                            <a class="form-control-static" [routerLink]="['../store-item', storeItem?.id, 'view' ]">{{storeItem.id}}</a>{{last ? '' : ', '}}
+                            <a class="form-control-static" [routerLink]="['../store-item', storeItem?.id, 'view' ]">{{storeItem.name}}</a>{{last ? '' : ', '}}
                         </span>
+                </td>
+                <td>
+                    <div *ngIf="groceryList.familyGroupId">
+                        <a [routerLink]="['../family-group', groceryList.familyGroupId , 'view' ]" >{{groceryList.familyGroupName}}</a>
+                    </div>
                 </td>
                 <td>
                     <div *ngIf="groceryList.familyMemberId">
                         <a [routerLink]="['../family-member', groceryList.familyMemberId , 'view' ]" >{{groceryList.familyMemberId}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="groceryList.familyGroupId">
-                        <a [routerLink]="['../family-group', groceryList.familyGroupId , 'view' ]" >{{groceryList.familyGroupId}}</a>
                     </div>
                 </td>
                 <td class="text-right">

@@ -42,12 +42,12 @@
                 <td>{{storeItemInstance.price}}</td>
                 <td>
                     <div *ngIf="storeItemInstance.storeItemId">
-                        <a [routerLink]="['../store-item', storeItemInstance.storeItemId , 'view' ]" >{{storeItemInstance.storeItemId}}</a>
+                        <a [routerLink]="['../store-item', storeItemInstance.storeItemId , 'view' ]" >{{storeItemInstance.storeItemName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="storeItemInstance.storeId">
-                        <a [routerLink]="['../store', storeItemInstance.storeId , 'view' ]" >{{storeItemInstance.storeId}}</a>
+                        <a [routerLink]="['../store', storeItemInstance.storeId , 'view' ]" >{{storeItemInstance.storeName}}</a>
                     </div>
                 </td>
                 <td class="text-right">

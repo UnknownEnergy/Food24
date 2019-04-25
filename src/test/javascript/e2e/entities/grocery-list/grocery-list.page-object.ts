@@ -28,8 +28,8 @@ export class GroceryListUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     storeItemSelect = element(by.id('field_storeItem'));
-    familyMemberSelect = element(by.id('field_familyMember'));
     familyGroupSelect = element(by.id('field_familyGroup'));
+    familyMemberSelect = element(by.id('field_familyMember'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -62,25 +62,6 @@ export class GroceryListUpdatePage {
         return this.storeItemSelect.element(by.css('option:checked')).getText();
     }
 
-    async familyMemberSelectLastOption() {
-        await this.familyMemberSelect
-            .all(by.tagName('option'))
-            .last()
-            .click();
-    }
-
-    async familyMemberSelectOption(option) {
-        await this.familyMemberSelect.sendKeys(option);
-    }
-
-    getFamilyMemberSelect(): ElementFinder {
-        return this.familyMemberSelect;
-    }
-
-    async getFamilyMemberSelectedOption() {
-        return this.familyMemberSelect.element(by.css('option:checked')).getText();
-    }
-
     async familyGroupSelectLastOption() {
         await this.familyGroupSelect
             .all(by.tagName('option'))
@@ -98,6 +79,25 @@ export class GroceryListUpdatePage {
 
     async getFamilyGroupSelectedOption() {
         return this.familyGroupSelect.element(by.css('option:checked')).getText();
+    }
+
+    async familyMemberSelectLastOption() {
+        await this.familyMemberSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async familyMemberSelectOption(option) {
+        await this.familyMemberSelect.sendKeys(option);
+    }
+
+    getFamilyMemberSelect(): ElementFinder {
+        return this.familyMemberSelect;
+    }
+
+    async getFamilyMemberSelectedOption() {
+        return this.familyMemberSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

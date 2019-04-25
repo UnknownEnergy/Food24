@@ -72,21 +72,6 @@ public class StoreItemServiceImpl implements StoreItemService {
     }
 
 
-
-    /**
-     *  get all the storeItems where StoreItemInstance is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<StoreItemDTO> findAllWhereStoreItemInstanceIsNull() {
-        log.debug("Request to get all storeItems where StoreItemInstance is null");
-        return StreamSupport
-            .stream(storeItemRepository.findAll().spliterator(), false)
-            .filter(storeItem -> storeItem.getStoreItemInstance() == null)
-            .map(storeItemMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
-
     /**
      * Get one storeItem by id.
      *

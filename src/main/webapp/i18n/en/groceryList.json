@@ -18,8 +18,8 @@
             },
             "name": "Name",
             "storeItem": "Store Item",
-            "familyMember": "Family Member",
-            "familyGroup": "Family Group"
+            "familyGroup": "Family Group",
+            "familyMember": "Family Member"
         }
     }
 }

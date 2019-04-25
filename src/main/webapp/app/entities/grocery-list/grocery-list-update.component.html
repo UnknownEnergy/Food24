@@ -24,7 +24,14 @@
                 <div class="form-group">
                     <label jhiTranslate="food24App.groceryList.storeItem" for="field_storeItem">Store Item</label>
                     <select class="form-control" id="field_storeItem" multiple name="storeItem" [(ngModel)]="groceryList.storeItems">
-                        <option [ngValue]="getSelected(groceryList.storeItems, storeItemOption)" *ngFor="let storeItemOption of storeitems; trackBy: trackStoreItemById">{{storeItemOption.id}}</option>
+                        <option [ngValue]="getSelected(groceryList.storeItems, storeItemOption)" *ngFor="let storeItemOption of storeitems; trackBy: trackStoreItemById">{{storeItemOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="food24App.groceryList.familyGroup" for="field_familyGroup">Family Group</label>
+                    <select class="form-control" id="field_familyGroup" name="familyGroup" [(ngModel)]="groceryList.familyGroupId" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="familyGroupOption.id" *ngFor="let familyGroupOption of familygroups; trackBy: trackFamilyGroupById">{{familyGroupOption.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -32,13 +39,6 @@
                     <select class="form-control" id="field_familyMember" name="familyMember" [(ngModel)]="groceryList.familyMemberId" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="familyMemberOption.id" *ngFor="let familyMemberOption of familymembers; trackBy: trackFamilyMemberById">{{familyMemberOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="food24App.groceryList.familyGroup" for="field_familyGroup">Family Group</label>
-                    <select class="form-control" id="field_familyGroup" name="familyGroup" [(ngModel)]="groceryList.familyGroupId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="familyGroupOption.id" *ngFor="let familyGroupOption of familygroups; trackBy: trackFamilyGroupById">{{familyGroupOption.id}}</option>
                     </select>
                 </div>
             </div>

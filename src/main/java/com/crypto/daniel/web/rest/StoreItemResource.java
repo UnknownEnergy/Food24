@@ -79,15 +79,10 @@ public class StoreItemResource {
     /**
      * GET  /store-items : get all the storeItems.
      *
-     * @param filter the filter of the request
      * @return the ResponseEntity with status 200 (OK) and the list of storeItems in body
      */
     @GetMapping("/store-items")
-    public List<StoreItemDTO> getAllStoreItems(@RequestParam(required = false) String filter) {
-        if ("storeiteminstance-is-null".equals(filter)) {
-            log.debug("REST request to get all StoreItems where storeItemInstance is null");
-            return storeItemService.findAllWhereStoreItemInstanceIsNull();
-        }
+    public List<StoreItemDTO> getAllStoreItems() {
         log.debug("REST request to get all StoreItems");
         return storeItemService.findAll();
     }

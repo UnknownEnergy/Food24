@@ -14,9 +14,13 @@ public class FamilyMemberDTO implements Serializable {
 
     private Long userId;
 
+    private String userLogin;
+
     private Set<FamilyGroupDTO> familyGroups = new HashSet<>();
 
     private Long locationId;
+
+    private String locationDescription;
 
     public Long getId() {
         return id;
@@ -34,6 +38,14 @@ public class FamilyMemberDTO implements Serializable {
         this.userId = userId;
     }
 
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
     public Set<FamilyGroupDTO> getFamilyGroups() {
         return familyGroups;
     }
@@ -48,6 +60,14 @@ public class FamilyMemberDTO implements Serializable {
 
     public void setLocationId(Long locationId) {
         this.locationId = locationId;
+    }
+
+    public String getLocationDescription() {
+        return locationDescription;
+    }
+
+    public void setLocationDescription(String locationDescription) {
+        this.locationDescription = locationDescription;
     }
 
     @Override
@@ -76,7 +96,9 @@ public class FamilyMemberDTO implements Serializable {
         return "FamilyMemberDTO{" +
             "id=" + getId() +
             ", user=" + getUserId() +
+            ", user='" + getUserLogin() + "'" +
             ", location=" + getLocationId() +
+            ", location='" + getLocationDescription() + "'" +
             "}";
     }
 }

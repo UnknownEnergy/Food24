@@ -21,7 +21,7 @@
             "otherEntityName": "location",
             "otherEntityRelationshipName": "store",
             "relationshipName": "location",
-            "otherEntityField": "id"
+            "otherEntityField": "description"
         }
     ],
     "changelogDate": "20190421115625",

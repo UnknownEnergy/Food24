@@ -16,6 +16,8 @@ public class StoreDTO implements Serializable {
 
     private Long locationId;
 
+    private String locationDescription;
+
     public Long getId() {
         return id;
     }
@@ -38,6 +40,14 @@ public class StoreDTO implements Serializable {
 
     public void setLocationId(Long locationId) {
         this.locationId = locationId;
+    }
+
+    public String getLocationDescription() {
+        return locationDescription;
+    }
+
+    public void setLocationDescription(String locationDescription) {
+        this.locationDescription = locationDescription;
     }
 
     @Override
@@ -67,6 +77,7 @@ public class StoreDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", location=" + getLocationId() +
+            ", location='" + getLocationDescription() + "'" +
             "}";
     }
 }

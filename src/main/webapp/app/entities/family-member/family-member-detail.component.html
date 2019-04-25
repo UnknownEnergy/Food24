@@ -7,18 +7,18 @@
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="food24App.familyMember.user">User</span></dt>
                 <dd>
-                    {{familyMember.userId}}
+                    {{familyMember.userLogin}}
                 </dd>
                 <dt><span jhiTranslate="food24App.familyMember.familyGroup">Family Group</span></dt>
                 <dd>
                     <span *ngFor="let familyGroup of familyMember.familyGroups; let last = last">
-                        <a [routerLink]="['/family-group', familyGroup?.id, 'view' ]">{{familyGroup.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/family-group', familyGroup?.id, 'view' ]">{{familyGroup.name}}</a>{{last ? '' : ', '}}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="food24App.familyMember.location">Location</span></dt>
                 <dd>
                     <div *ngIf="familyMember.locationId">
-                        <a [routerLink]="['/location', familyMember.locationId, 'view']">{{familyMember.locationId}}</a>
+                        <a [routerLink]="['/location', familyMember.locationId, 'view']">{{familyMember.locationDescription}}</a>
                     </div>
                 </dd>
             </dl>

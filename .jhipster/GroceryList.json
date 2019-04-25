@@ -15,21 +15,20 @@
             "otherEntityName": "storeItem",
             "otherEntityRelationshipName": "groceryList",
             "relationshipName": "storeItem",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "familyMember",
-            "otherEntityRelationshipName": "groceryList",
-            "relationshipName": "familyMember",
-            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "familyGroup",
             "otherEntityRelationshipName": "groceryList",
             "relationshipName": "familyGroup",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "familyMember",
+            "otherEntityName": "familyMember",
+            "relationshipType": "many-to-one",
             "otherEntityField": "id"
         }
     ],

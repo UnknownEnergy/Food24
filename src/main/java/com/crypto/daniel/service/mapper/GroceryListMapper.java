@@ -8,15 +8,16 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity GroceryList and its DTO GroceryListDTO.
  */
-@Mapper(componentModel = "spring", uses = {StoreItemMapper.class, FamilyMemberMapper.class, FamilyGroupMapper.class})
+@Mapper(componentModel = "spring", uses = {StoreItemMapper.class, FamilyGroupMapper.class, FamilyMemberMapper.class})
 public interface GroceryListMapper extends EntityMapper<GroceryListDTO, GroceryList> {
 
-    @Mapping(source = "familyMember.id", target = "familyMemberId")
     @Mapping(source = "familyGroup.id", target = "familyGroupId")
+    @Mapping(source = "familyGroup.name", target = "familyGroupName")
+    @Mapping(source = "familyMember.id", target = "familyMemberId")
     GroceryListDTO toDto(GroceryList groceryList);
 
-    @Mapping(source = "familyMemberId", target = "familyMember")
     @Mapping(source = "familyGroupId", target = "familyGroup")
+    @Mapping(source = "familyMemberId", target = "familyMember")
     GroceryList toEntity(GroceryListDTO groceryListDTO);
 
     default GroceryList fromId(Long id) {

@@ -42,8 +42,8 @@ describe('GroceryList e2e test', () => {
         await promise.all([
             groceryListUpdatePage.setNameInput('name'),
             // groceryListUpdatePage.storeItemSelectLastOption(),
-            groceryListUpdatePage.familyMemberSelectLastOption(),
-            groceryListUpdatePage.familyGroupSelectLastOption()
+            groceryListUpdatePage.familyGroupSelectLastOption(),
+            groceryListUpdatePage.familyMemberSelectLastOption()
         ]);
         expect(await groceryListUpdatePage.getNameInput()).to.eq('name');
         await groceryListUpdatePage.save();

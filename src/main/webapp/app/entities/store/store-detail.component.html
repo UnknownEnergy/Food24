@@ -12,7 +12,7 @@
                 <dt><span jhiTranslate="food24App.store.location">Location</span></dt>
                 <dd>
                     <div *ngIf="store.locationId">
-                        <a [routerLink]="['/location', store.locationId, 'view']">{{store.locationId}}</a>
+                        <a [routerLink]="['/location', store.locationId, 'view']">{{store.locationDescription}}</a>
                     </div>
                 </dd>
             </dl>

@@ -12,6 +12,7 @@ import org.mapstruct.*;
 public interface StoreMapper extends EntityMapper<StoreDTO, Store> {
 
     @Mapping(source = "location.id", target = "locationId")
+    @Mapping(source = "location.description", target = "locationDescription")
     StoreDTO toDto(Store store);
 
     @Mapping(target = "storeItemInstances", ignore = true)

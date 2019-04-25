@@ -24,12 +24,6 @@ public interface StoreItemService {
      * @return the list of entities
      */
     List<StoreItemDTO> findAll();
-    /**
-     * Get all the StoreItemDTO where StoreItemInstance is null.
-     *
-     * @return the list of entities
-     */
-    List<StoreItemDTO> findAllWhereStoreItemInstanceIsNull();
 
 
     /**

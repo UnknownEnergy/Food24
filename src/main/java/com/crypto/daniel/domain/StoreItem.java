@@ -34,10 +34,6 @@ public class StoreItem implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "storeItem")
-    @JsonIgnore
-    private StoreItemInstance storeItemInstance;
-
     @ManyToMany(mappedBy = "storeItems")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
@@ -63,19 +59,6 @@ public class StoreItem implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public StoreItemInstance getStoreItemInstance() {
-        return storeItemInstance;
-    }
-
-    public StoreItem storeItemInstance(StoreItemInstance storeItemInstance) {
-        this.storeItemInstance = storeItemInstance;
-        return this;
-    }
-
-    public void setStoreItemInstance(StoreItemInstance storeItemInstance) {
-        this.storeItemInstance = storeItemInstance;
     }
 
     public Set<GroceryList> getGroceryLists() {

@@ -43,11 +43,11 @@ public class GroceryList implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("groceryLists")
-    private FamilyMember familyMember;
+    private FamilyGroup familyGroup;
 
     @ManyToOne
     @JsonIgnoreProperties("groceryLists")
-    private FamilyGroup familyGroup;
+    private FamilyMember familyMember;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -96,19 +96,6 @@ public class GroceryList implements Serializable {
         this.storeItems = storeItems;
     }
 
-    public FamilyMember getFamilyMember() {
-        return familyMember;
-    }
-
-    public GroceryList familyMember(FamilyMember familyMember) {
-        this.familyMember = familyMember;
-        return this;
-    }
-
-    public void setFamilyMember(FamilyMember familyMember) {
-        this.familyMember = familyMember;
-    }
-
     public FamilyGroup getFamilyGroup() {
         return familyGroup;
     }
@@ -120,6 +107,19 @@ public class GroceryList implements Serializable {
 
     public void setFamilyGroup(FamilyGroup familyGroup) {
         this.familyGroup = familyGroup;
+    }
+
+    public FamilyMember getFamilyMember() {
+        return familyMember;
+    }
+
+    public GroceryList familyMember(FamilyMember familyMember) {
+        this.familyMember = familyMember;
+        return this;
+    }
+
+    public void setFamilyMember(FamilyMember familyMember) {
+        this.familyMember = familyMember;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -12,7 +12,9 @@ import org.mapstruct.*;
 public interface FamilyMemberMapper extends EntityMapper<FamilyMemberDTO, FamilyMember> {
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.login", target = "userLogin")
     @Mapping(source = "location.id", target = "locationId")
+    @Mapping(source = "location.description", target = "locationDescription")
     FamilyMemberDTO toDto(FamilyMember familyMember);
 
     @Mapping(target = "groceryLists", ignore = true)

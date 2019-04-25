@@ -12,19 +12,19 @@
                 <dt><span jhiTranslate="food24App.groceryList.storeItem">Store Item</span></dt>
                 <dd>
                     <span *ngFor="let storeItem of groceryList.storeItems; let last = last">
-                        <a [routerLink]="['/store-item', storeItem?.id, 'view' ]">{{storeItem.id}}</a>{{last ? '' : ', '}}
+                        <a [routerLink]="['/store-item', storeItem?.id, 'view' ]">{{storeItem.name}}</a>{{last ? '' : ', '}}
                     </span>
+                </dd>
+                <dt><span jhiTranslate="food24App.groceryList.familyGroup">Family Group</span></dt>
+                <dd>
+                    <div *ngIf="groceryList.familyGroupId">
+                        <a [routerLink]="['/family-group', groceryList.familyGroupId, 'view']">{{groceryList.familyGroupName}}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="food24App.groceryList.familyMember">Family Member</span></dt>
                 <dd>
                     <div *ngIf="groceryList.familyMemberId">
                         <a [routerLink]="['/family-member', groceryList.familyMemberId, 'view']">{{groceryList.familyMemberId}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="food24App.groceryList.familyGroup">Family Group</span></dt>
-                <dd>
-                    <div *ngIf="groceryList.familyGroupId">
-                        <a [routerLink]="['/family-group', groceryList.familyGroupId, 'view']">{{groceryList.familyGroupId}}</a>
                     </div>
                 </dd>
             </dl>

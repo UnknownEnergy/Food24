@@ -8,10 +8,10 @@ import { IGroceryList } from 'app/shared/model/grocery-list.model';
 import { GroceryListService } from './grocery-list.service';
 import { IStoreItem } from 'app/shared/model/store-item.model';
 import { StoreItemService } from 'app/entities/store-item';
-import { IFamilyMember } from 'app/shared/model/family-member.model';
-import { FamilyMemberService } from 'app/entities/family-member';
 import { IFamilyGroup } from 'app/shared/model/family-group.model';
 import { FamilyGroupService } from 'app/entities/family-group';
+import { IFamilyMember } from 'app/shared/model/family-member.model';
+import { FamilyMemberService } from 'app/entities/family-member';
 
 @Component({
     selector: 'jhi-grocery-list-update',
@@ -23,16 +23,16 @@ export class GroceryListUpdateComponent implements OnInit {
 
     storeitems: IStoreItem[];
 
-    familymembers: IFamilyMember[];
-
     familygroups: IFamilyGroup[];
+
+    familymembers: IFamilyMember[];
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected groceryListService: GroceryListService,
         protected storeItemService: StoreItemService,
-        protected familyMemberService: FamilyMemberService,
         protected familyGroupService: FamilyGroupService,
+        protected familyMemberService: FamilyMemberService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -48,13 +48,6 @@ export class GroceryListUpdateComponent implements OnInit {
                 map((response: HttpResponse<IStoreItem[]>) => response.body)
             )
             .subscribe((res: IStoreItem[]) => (this.storeitems = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.familyMemberService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IFamilyMember[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IFamilyMember[]>) => response.body)
-            )
-            .subscribe((res: IFamilyMember[]) => (this.familymembers = res), (res: HttpErrorResponse) => this.onError(res.message));
         this.familyGroupService
             .query()
             .pipe(
@@ -62,6 +55,13 @@ export class GroceryListUpdateComponent implements OnInit {
                 map((response: HttpResponse<IFamilyGroup[]>) => response.body)
             )
             .subscribe((res: IFamilyGroup[]) => (this.familygroups = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.familyMemberService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IFamilyMember[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IFamilyMember[]>) => response.body)
+            )
+            .subscribe((res: IFamilyMember[]) => (this.familymembers = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -98,11 +98,11 @@ export class GroceryListUpdateComponent implements OnInit {
         return item.id;
     }
 
-    trackFamilyMemberById(index: number, item: IFamilyMember) {
+    trackFamilyGroupById(index: number, item: IFamilyGroup) {
         return item.id;
     }
 
-    trackFamilyGroupById(index: number, item: IFamilyGroup) {
+    trackFamilyMemberById(index: number, item: IFamilyMember) {
         return item.id;
     }
 

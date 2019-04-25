@@ -19,17 +19,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="store_item"/>
         
-        <addForeignKeyConstraint baseColumnNames="family_member_id"
-                                 baseTableName="grocery_list"
-                                 constraintName="fk_grocery_list_family_member_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="family_member"/>
-
         <addForeignKeyConstraint baseColumnNames="family_group_id"
                                  baseTableName="grocery_list"
                                  constraintName="fk_grocery_list_family_group_id"
                                  referencedColumnNames="id"
                                  referencedTableName="family_group"/>
+
+        <addForeignKeyConstraint baseColumnNames="family_member_id"
+                                 baseTableName="grocery_list"
+                                 constraintName="fk_grocery_list_family_member_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="family_member"/>
 
     </changeSet>
 </databaseChangeLog>

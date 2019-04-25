@@ -37,11 +37,6 @@ public class FamilyGroup implements Serializable {
     @OneToMany(mappedBy = "familyGroup")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<GroceryList> groceryLists = new HashSet<>();
-    @ManyToMany(mappedBy = "familyGroups")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<FamilyMember> familyMembers = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -87,31 +82,6 @@ public class FamilyGroup implements Serializable {
 
     public void setGroceryLists(Set<GroceryList> groceryLists) {
         this.groceryLists = groceryLists;
-    }
-
-    public Set<FamilyMember> getFamilyMembers() {
-        return familyMembers;
-    }
-
-    public FamilyGroup familyMembers(Set<FamilyMember> familyMembers) {
-        this.familyMembers = familyMembers;
-        return this;
-    }
-
-    public FamilyGroup addFamilyMember(FamilyMember familyMember) {
-        this.familyMembers.add(familyMember);
-        familyMember.getFamilyGroups().add(this);
-        return this;
-    }
-
-    public FamilyGroup removeFamilyMember(FamilyMember familyMember) {
-        this.familyMembers.remove(familyMember);
-        familyMember.getFamilyGroups().remove(this);
-        return this;
-    }
-
-    public void setFamilyMembers(Set<FamilyMember> familyMembers) {
-        this.familyMembers = familyMembers;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

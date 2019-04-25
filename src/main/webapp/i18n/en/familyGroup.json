@@ -17,8 +17,7 @@
                 "title": "Family Group"
             },
             "name": "Name",
-            "groceryList": "Grocery List",
-            "familyMember": "Family Member"
+            "groceryList": "Grocery List"
         }
     }
 }

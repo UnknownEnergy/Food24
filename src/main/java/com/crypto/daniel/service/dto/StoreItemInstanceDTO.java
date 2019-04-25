@@ -16,7 +16,11 @@ public class StoreItemInstanceDTO implements Serializable {
 
     private Long storeItemId;
 
+    private String storeItemName;
+
     private Long storeId;
+
+    private String storeName;
 
     public Long getId() {
         return id;
@@ -42,12 +46,28 @@ public class StoreItemInstanceDTO implements Serializable {
         this.storeItemId = storeItemId;
     }
 
+    public String getStoreItemName() {
+        return storeItemName;
+    }
+
+    public void setStoreItemName(String storeItemName) {
+        this.storeItemName = storeItemName;
+    }
+
     public Long getStoreId() {
         return storeId;
     }
 
     public void setStoreId(Long storeId) {
         this.storeId = storeId;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     @Override
@@ -77,7 +97,9 @@ public class StoreItemInstanceDTO implements Serializable {
             "id=" + getId() +
             ", price=" + getPrice() +
             ", storeItem=" + getStoreItemId() +
+            ", storeItem='" + getStoreItemName() + "'" +
             ", store=" + getStoreId() +
+            ", store='" + getStoreName() + "'" +
             "}";
     }
 }

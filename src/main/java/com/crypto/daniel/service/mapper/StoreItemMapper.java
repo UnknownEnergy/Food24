@@ -12,7 +12,6 @@ import org.mapstruct.*;
 public interface StoreItemMapper extends EntityMapper<StoreItemDTO, StoreItem> {
 
 
-    @Mapping(target = "storeItemInstance", ignore = true)
     @Mapping(target = "groceryLists", ignore = true)
     StoreItem toEntity(StoreItemDTO storeItemDTO);
 

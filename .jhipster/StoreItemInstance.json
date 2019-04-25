@@ -15,7 +15,7 @@
             "otherEntityName": "storeItem",
             "otherEntityRelationshipName": "storeItemInstance",
             "relationshipName": "storeItem",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": true
         },
         {
@@ -23,7 +23,7 @@
             "otherEntityName": "store",
             "otherEntityRelationshipName": "storeItemInstance",
             "relationshipName": "store",
-            "otherEntityField": "id"
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20190421115624",

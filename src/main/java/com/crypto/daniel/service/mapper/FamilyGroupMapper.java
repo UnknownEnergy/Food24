@@ -13,7 +13,6 @@ public interface FamilyGroupMapper extends EntityMapper<FamilyGroupDTO, FamilyGr
 
 
     @Mapping(target = "groceryLists", ignore = true)
-    @Mapping(target = "familyMembers", ignore = true)
     FamilyGroup toEntity(FamilyGroupDTO familyGroupDTO);
 
     default FamilyGroup fromId(Long id) {

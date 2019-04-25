@@ -15,14 +15,6 @@
             "otherEntityName": "groceryList",
             "otherEntityRelationshipName": "familyGroup",
             "relationshipName": "groceryList"
-        },
-        {
-            "relationshipType": "many-to-many",
-            "otherEntityName": "familyMember",
-            "otherEntityRelationshipName": "familyGroup",
-            "relationshipName": "familyMember",
-            "otherEntityField": "id",
-            "ownerSide": false
         }
     ],
     "changelogDate": "20190421115621",

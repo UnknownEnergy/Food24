@@ -11,18 +11,11 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "storeItemInstance",
-            "otherEntityRelationshipName": "storeItem",
-            "relationshipName": "storeItemInstance",
-            "ownerSide": false
-        },
-        {
             "relationshipType": "many-to-many",
             "otherEntityName": "groceryList",
             "otherEntityRelationshipName": "storeItem",
             "relationshipName": "groceryList",
-            "otherEntityField": "id",
+            "otherEntityField": "name",
             "ownerSide": false
         }
     ],

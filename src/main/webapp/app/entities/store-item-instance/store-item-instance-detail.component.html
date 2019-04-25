@@ -12,13 +12,13 @@
                 <dt><span jhiTranslate="food24App.storeItemInstance.storeItem">Store Item</span></dt>
                 <dd>
                     <div *ngIf="storeItemInstance.storeItemId">
-                        <a [routerLink]="['/store-item', storeItemInstance.storeItemId, 'view']">{{storeItemInstance.storeItemId}}</a>
+                        <a [routerLink]="['/store-item', storeItemInstance.storeItemId, 'view']">{{storeItemInstance.storeItemName}}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="food24App.storeItemInstance.store">Store</span></dt>
                 <dd>
                     <div *ngIf="storeItemInstance.storeId">
-                        <a [routerLink]="['/store', storeItemInstance.storeId, 'view']">{{storeItemInstance.storeId}}</a>
+                        <a [routerLink]="['/store', storeItemInstance.storeId, 'view']">{{storeItemInstance.storeName}}</a>
                     </div>
                 </dd>
             </dl>

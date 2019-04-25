@@ -4,9 +4,16 @@ export interface IStore {
     id?: number;
     name?: string;
     storeItemInstances?: IStoreItemInstance[];
+    locationDescription?: string;
     locationId?: number;
 }
 
 export class Store implements IStore {
-    constructor(public id?: number, public name?: string, public storeItemInstances?: IStoreItemInstance[], public locationId?: number) {}
+    constructor(
+        public id?: number,
+        public name?: string,
+        public storeItemInstances?: IStoreItemInstance[],
+        public locationDescription?: string,
+        public locationId?: number
+    ) {}
 }

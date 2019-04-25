@@ -4,8 +4,9 @@ export interface IGroceryList {
     id?: number;
     name?: string;
     storeItems?: IStoreItem[];
-    familyMemberId?: number;
+    familyGroupName?: string;
     familyGroupId?: number;
+    familyMemberId?: number;
 }
 
 export class GroceryList implements IGroceryList {
@@ -13,7 +14,8 @@ export class GroceryList implements IGroceryList {
         public id?: number,
         public name?: string,
         public storeItems?: IStoreItem[],
-        public familyMemberId?: number,
-        public familyGroupId?: number
+        public familyGroupName?: string,
+        public familyGroupId?: number,
+        public familyMemberId?: number
     ) {}
 }
