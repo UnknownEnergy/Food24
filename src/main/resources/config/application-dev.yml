@@ -45,7 +45,7 @@ spring:
             indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:file:./target/h2db/db/food24;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:./target/h2db/db/food24;AUTO_SERVER=TRUE
         username: Food24
         password:
         hikari:
