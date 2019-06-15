@@ -101,20 +101,24 @@ public class StoreItemInstanceResource {
         List<StoreItemInstanceDTO> filteredResult = new ArrayList<>();
 
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userService.getUserWithAuthoritiesByLogin(username).orElse(null);
 
-        storeItemInstanceServiceAll.forEach(storeItemInstanceDTO -> {
-            if (groceryListService.findAll().stream()
-                .filter(groceryListDTO -> familyMemberService.findAll().stream()
-                    .filter(familyMemberDTO -> familyMemberDTO.getUserId().equals(Objects.requireNonNull(user).getId()))
-                    .anyMatch(familyMemberDTO -> familyMemberDTO.getFamilyGroups().stream()
-                        .anyMatch(familyGroupDTO -> groceryListDTO.getFamilyGroupId().equals(familyGroupDTO.getId()))))
-                .flatMap(groceryListDTO -> groceryListDTO.getStoreItems().stream())
-                .anyMatch(storeItemDTO ->
-                    storeItemDTO.getId().equals(storeItemInstanceDTO.getStoreItemId()))) {
-                filteredResult.add(storeItemInstanceDTO);
-            }
-        });
+        if(username.equals("admin")) {
+            return storeItemInstanceServiceAll;
+        } else {
+            User user = userService.getUserWithAuthoritiesByLogin(username).orElse(null);
+            storeItemInstanceServiceAll.forEach(storeItemInstanceDTO -> {
+                if (groceryListService.findAll().stream()
+                    .filter(groceryListDTO -> familyMemberService.findAll().stream()
+                        .filter(familyMemberDTO -> familyMemberDTO.getUserId().equals(Objects.requireNonNull(user).getId()))
+                        .anyMatch(familyMemberDTO -> familyMemberDTO.getFamilyGroups().stream()
+                            .anyMatch(familyGroupDTO -> groceryListDTO.getFamilyGroupId().equals(familyGroupDTO.getId()))))
+                    .flatMap(groceryListDTO -> groceryListDTO.getStoreItems().stream())
+                    .anyMatch(storeItemDTO ->
+                        storeItemDTO.getId().equals(storeItemInstanceDTO.getStoreItemId()))) {
+                    filteredResult.add(storeItemInstanceDTO);
+                }
+            });
+        }
 
         return filteredResult;
     }

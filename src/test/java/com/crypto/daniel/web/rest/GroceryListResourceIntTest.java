@@ -5,11 +5,14 @@ import com.crypto.daniel.Food24App;
 import com.crypto.daniel.domain.GroceryList;
 import com.crypto.daniel.repository.GroceryListRepository;
 import com.crypto.daniel.repository.search.GroceryListSearchRepository;
+import com.crypto.daniel.service.FamilyMemberService;
 import com.crypto.daniel.service.GroceryListService;
+import com.crypto.daniel.service.UserService;
 import com.crypto.daniel.service.dto.GroceryListDTO;
 import com.crypto.daniel.service.mapper.GroceryListMapper;
 import com.crypto.daniel.web.rest.errors.ExceptionTranslator;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +21,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -96,10 +98,16 @@ public class GroceryListResourceIntTest {
 
     private GroceryList groceryList;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private FamilyMemberService familyMemberService;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final GroceryListResource groceryListResource = new GroceryListResource(groceryListService);
+        final GroceryListResource groceryListResource = new GroceryListResource(groceryListService, userService, familyMemberService);
         this.restGroceryListMockMvc = MockMvcBuilders.standaloneSetup(groceryListResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -205,7 +213,7 @@ public class GroceryListResourceIntTest {
     
     @SuppressWarnings({"unchecked"})
     public void getAllGroceryListsWithEagerRelationshipsIsEnabled() throws Exception {
-        GroceryListResource groceryListResource = new GroceryListResource(groceryListServiceMock);
+        GroceryListResource groceryListResource = new GroceryListResource(groceryListServiceMock, userService, familyMemberService);
         when(groceryListServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restGroceryListMockMvc = MockMvcBuilders.standaloneSetup(groceryListResource)
@@ -222,7 +230,7 @@ public class GroceryListResourceIntTest {
 
     @SuppressWarnings({"unchecked"})
     public void getAllGroceryListsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        GroceryListResource groceryListResource = new GroceryListResource(groceryListServiceMock);
+        GroceryListResource groceryListResource = new GroceryListResource(groceryListServiceMock, userService, familyMemberService);
             when(groceryListServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restGroceryListMockMvc = MockMvcBuilders.standaloneSetup(groceryListResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

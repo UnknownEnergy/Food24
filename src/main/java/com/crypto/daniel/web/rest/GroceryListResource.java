@@ -1,23 +1,26 @@
 package com.crypto.daniel.web.rest;
+
+import com.crypto.daniel.domain.User;
+import com.crypto.daniel.service.FamilyMemberService;
 import com.crypto.daniel.service.GroceryListService;
+import com.crypto.daniel.service.UserService;
+import com.crypto.daniel.service.dto.GroceryListDTO;
 import com.crypto.daniel.web.rest.errors.BadRequestAlertException;
 import com.crypto.daniel.web.rest.util.HeaderUtil;
-import com.crypto.daniel.service.dto.GroceryListDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing GroceryList.
@@ -32,8 +35,14 @@ public class GroceryListResource {
 
     private final GroceryListService groceryListService;
 
-    public GroceryListResource(GroceryListService groceryListService) {
+    private final UserService userService;
+
+    private final FamilyMemberService familyMemberService;
+
+    public GroceryListResource(GroceryListService groceryListService, UserService userService, FamilyMemberService familyMemberService) {
         this.groceryListService = groceryListService;
+        this.userService = userService;
+        this.familyMemberService = familyMemberService;
     }
 
     /**
@@ -85,7 +94,18 @@ public class GroceryListResource {
     @GetMapping("/grocery-lists")
     public List<GroceryListDTO> getAllGroceryLists(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all GroceryLists");
-        return groceryListService.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserWithAuthoritiesByLogin(username).orElse(null);
+
+        if (username.equals("admin")) {
+            return groceryListService.findAll();
+        } else {
+            return groceryListService.findAll().stream()
+                .filter(groceryListDTO -> familyMemberService.findAll().stream()
+                    .filter(familyMemberDTO -> familyMemberDTO.getUserId().equals(Objects.requireNonNull(user).getId()))
+                    .anyMatch(familyMemberDTO -> familyMemberDTO.getFamilyGroups().stream()
+                        .anyMatch(familyGroupDTO -> familyGroupDTO.getId().equals(groceryListDTO.getFamilyGroupId())))).collect(Collectors.toList());
+        }
     }
 
     /**
