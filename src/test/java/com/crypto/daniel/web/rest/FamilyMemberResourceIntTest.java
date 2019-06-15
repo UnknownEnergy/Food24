@@ -6,6 +6,7 @@ import com.crypto.daniel.domain.FamilyMember;
 import com.crypto.daniel.repository.FamilyMemberRepository;
 import com.crypto.daniel.repository.search.FamilyMemberSearchRepository;
 import com.crypto.daniel.service.FamilyMemberService;
+import com.crypto.daniel.service.UserService;
 import com.crypto.daniel.service.dto.FamilyMemberDTO;
 import com.crypto.daniel.service.mapper.FamilyMemberMapper;
 import com.crypto.daniel.web.rest.errors.ExceptionTranslator;
@@ -66,6 +67,9 @@ public class FamilyMemberResourceIntTest {
     @Autowired
     private FamilyMemberService familyMemberService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * This repository is mocked in the com.crypto.daniel.repository.search test package.
      *
@@ -96,7 +100,7 @@ public class FamilyMemberResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final FamilyMemberResource familyMemberResource = new FamilyMemberResource(familyMemberService);
+        final FamilyMemberResource familyMemberResource = new FamilyMemberResource(familyMemberService, userService);
         this.restFamilyMemberMockMvc = MockMvcBuilders.standaloneSetup(familyMemberResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -180,7 +184,7 @@ public class FamilyMemberResourceIntTest {
     
     @SuppressWarnings({"unchecked"})
     public void getAllFamilyMembersWithEagerRelationshipsIsEnabled() throws Exception {
-        FamilyMemberResource familyMemberResource = new FamilyMemberResource(familyMemberServiceMock);
+        FamilyMemberResource familyMemberResource = new FamilyMemberResource(familyMemberServiceMock, userService);
         when(familyMemberServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
 
         MockMvc restFamilyMemberMockMvc = MockMvcBuilders.standaloneSetup(familyMemberResource)
@@ -197,7 +201,7 @@ public class FamilyMemberResourceIntTest {
 
     @SuppressWarnings({"unchecked"})
     public void getAllFamilyMembersWithEagerRelationshipsIsNotEnabled() throws Exception {
-        FamilyMemberResource familyMemberResource = new FamilyMemberResource(familyMemberServiceMock);
+        FamilyMemberResource familyMemberResource = new FamilyMemberResource(familyMemberServiceMock, userService);
             when(familyMemberServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
             MockMvc restFamilyMemberMockMvc = MockMvcBuilders.standaloneSetup(familyMemberResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
