@@ -106,13 +106,11 @@ public class FamilyMember implements Serializable {
 
     public FamilyMember addFamilyGroup(FamilyGroup familyGroup) {
         this.familyGroups.add(familyGroup);
-        familyGroup.getFamilyMembers().add(this);
         return this;
     }
 
     public FamilyMember removeFamilyGroup(FamilyGroup familyGroup) {
         this.familyGroups.remove(familyGroup);
-        familyGroup.getFamilyMembers().remove(this);
         return this;
     }
 

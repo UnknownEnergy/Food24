@@ -9,6 +9,29 @@
     <agm-marker *ngFor="let location of locations" [latitude]="location.latitude" [longitude]="location.longitude" [label]="'X'">
         <agm-info-window [disableAutoPan]="true">
             <a [routerLink]="['/location', location.id, 'view' ]">{{location.description}}</a>
+
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><span jhiTranslate="food24App.storeItemInstance.storeItem">Store Item</span></th>
+                    <th><span jhiTranslate="food24App.storeItemInstance.price">Price</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let storeItemInstance of storeItemInstances">
+                    <td>
+                        <div *ngIf="storeItemInstance.storeItemId">
+                            <a [routerLink]="['../store-item', storeItemInstance.storeItemId , 'view' ]" >{{storeItemInstance.storeItemName}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        {{storeItemInstance.price}}
+                    </td>
+                    <!--{{location.stores[0].id + storeItemInstance.storeId}}-->
+                </tr>
+                </tbody>
+            </table>
         </agm-info-window>
     </agm-marker>
 </agm-map>
