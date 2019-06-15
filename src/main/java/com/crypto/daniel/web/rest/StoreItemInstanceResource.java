@@ -1,23 +1,27 @@
 package com.crypto.daniel.web.rest;
+
+import com.crypto.daniel.domain.User;
+import com.crypto.daniel.service.FamilyMemberService;
+import com.crypto.daniel.service.GroceryListService;
 import com.crypto.daniel.service.StoreItemInstanceService;
+import com.crypto.daniel.service.UserService;
+import com.crypto.daniel.service.dto.StoreItemInstanceDTO;
 import com.crypto.daniel.web.rest.errors.BadRequestAlertException;
 import com.crypto.daniel.web.rest.util.HeaderUtil;
-import com.crypto.daniel.service.dto.StoreItemInstanceDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing StoreItemInstance.
@@ -32,8 +36,17 @@ public class StoreItemInstanceResource {
 
     private final StoreItemInstanceService storeItemInstanceService;
 
-    public StoreItemInstanceResource(StoreItemInstanceService storeItemInstanceService) {
+    private final GroceryListService groceryListService;
+
+    private final FamilyMemberService familyMemberService;
+
+    private final UserService userService;
+
+    public StoreItemInstanceResource(StoreItemInstanceService storeItemInstanceService, GroceryListService groceryListService, FamilyMemberService familyMemberService, UserService userService) {
         this.storeItemInstanceService = storeItemInstanceService;
+        this.groceryListService = groceryListService;
+        this.familyMemberService = familyMemberService;
+        this.userService = userService;
     }
 
     /**
@@ -84,7 +97,26 @@ public class StoreItemInstanceResource {
     @GetMapping("/store-item-instances")
     public List<StoreItemInstanceDTO> getAllStoreItemInstances() {
         log.debug("REST request to get all StoreItemInstances");
-        return storeItemInstanceService.findAll();
+        List<StoreItemInstanceDTO> storeItemInstanceServiceAll = storeItemInstanceService.findAll();
+        List<StoreItemInstanceDTO> filteredResult = new ArrayList<>();
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserWithAuthoritiesByLogin(username).orElse(null);
+
+        storeItemInstanceServiceAll.forEach(storeItemInstanceDTO -> {
+            if (groceryListService.findAll().stream()
+                .filter(groceryListDTO -> familyMemberService.findAll().stream()
+                    .filter(familyMemberDTO -> familyMemberDTO.getUserId().equals(Objects.requireNonNull(user).getId()))
+                    .anyMatch(familyMemberDTO -> familyMemberDTO.getFamilyGroups().stream()
+                        .anyMatch(familyGroupDTO -> groceryListDTO.getFamilyGroupId().equals(familyGroupDTO.getId()))))
+                .flatMap(groceryListDTO -> groceryListDTO.getStoreItems().stream())
+                .anyMatch(storeItemDTO ->
+                    storeItemDTO.getId().equals(storeItemInstanceDTO.getStoreItemId()))) {
+                filteredResult.add(storeItemInstanceDTO);
+            }
+        });
+
+        return filteredResult;
     }
 
     /**

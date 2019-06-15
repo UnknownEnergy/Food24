@@ -13,7 +13,7 @@ import { AgmCoreModule } from '@agm/core';
         BrowserModule,
         AgmCoreModule.forRoot({
             //TODO ADD API KEY HERE!!!
-            apiKey: 'API_KEY'
+            apiKey: 'AIzaSyDvF652TU9vT3hNw_YkMOvM2RDshzAOmUU'
         }),
         RouterModule.forRoot([MAP_ROUTE], { useHash: true })
     ],

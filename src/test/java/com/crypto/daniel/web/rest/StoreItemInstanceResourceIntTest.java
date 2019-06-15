@@ -5,7 +5,7 @@ import com.crypto.daniel.Food24App;
 import com.crypto.daniel.domain.StoreItemInstance;
 import com.crypto.daniel.repository.StoreItemInstanceRepository;
 import com.crypto.daniel.repository.search.StoreItemInstanceSearchRepository;
-import com.crypto.daniel.service.StoreItemInstanceService;
+import com.crypto.daniel.service.*;
 import com.crypto.daniel.service.dto.StoreItemInstanceDTO;
 import com.crypto.daniel.service.mapper.StoreItemInstanceMapper;
 import com.crypto.daniel.web.rest.errors.ExceptionTranslator;
@@ -59,6 +59,16 @@ public class StoreItemInstanceResourceIntTest {
     @Autowired
     private StoreItemInstanceService storeItemInstanceService;
 
+    @Autowired
+    private GroceryListService groceryListService;
+
+    @Autowired
+    private FamilyMemberService familyMemberService;
+
+    @Autowired
+    private UserService userService;
+
+
     /**
      * This repository is mocked in the com.crypto.daniel.repository.search test package.
      *
@@ -89,7 +99,7 @@ public class StoreItemInstanceResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final StoreItemInstanceResource storeItemInstanceResource = new StoreItemInstanceResource(storeItemInstanceService);
+        final StoreItemInstanceResource storeItemInstanceResource = new StoreItemInstanceResource(storeItemInstanceService, groceryListService, familyMemberService, userService);
         this.restStoreItemInstanceMockMvc = MockMvcBuilders.standaloneSetup(storeItemInstanceResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

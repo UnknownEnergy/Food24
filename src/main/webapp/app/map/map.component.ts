@@ -30,8 +30,9 @@ export class MapComponent implements OnInit {
                 this.lat = +pos.coords.latitude;
             });
         }
-        this.title = 'Maps';
+        this.title = 'Look for your store nearby...';
     }
+
     ngOnInit() {
         this.loadAll();
     }
