@@ -6,6 +6,8 @@ import com.crypto.daniel.domain.FamilyGroup;
 import com.crypto.daniel.repository.FamilyGroupRepository;
 import com.crypto.daniel.repository.search.FamilyGroupSearchRepository;
 import com.crypto.daniel.service.FamilyGroupService;
+import com.crypto.daniel.service.FamilyMemberService;
+import com.crypto.daniel.service.UserService;
 import com.crypto.daniel.service.dto.FamilyGroupDTO;
 import com.crypto.daniel.service.mapper.FamilyGroupMapper;
 import com.crypto.daniel.web.rest.errors.ExceptionTranslator;
@@ -86,10 +88,16 @@ public class FamilyGroupResourceIntTest {
 
     private FamilyGroup familyGroup;
 
+    @Autowired
+    private FamilyMemberService familyMemberService;
+
+    @Autowired
+    private UserService userService;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final FamilyGroupResource familyGroupResource = new FamilyGroupResource(familyGroupService);
+        final FamilyGroupResource familyGroupResource = new FamilyGroupResource(familyGroupService, familyMemberService, userService);
         this.restFamilyGroupMockMvc = MockMvcBuilders.standaloneSetup(familyGroupResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

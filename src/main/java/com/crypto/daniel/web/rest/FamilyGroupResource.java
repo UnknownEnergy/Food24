@@ -1,23 +1,26 @@
 package com.crypto.daniel.web.rest;
+
+import com.crypto.daniel.domain.User;
 import com.crypto.daniel.service.FamilyGroupService;
+import com.crypto.daniel.service.FamilyMemberService;
+import com.crypto.daniel.service.UserService;
+import com.crypto.daniel.service.dto.FamilyGroupDTO;
 import com.crypto.daniel.web.rest.errors.BadRequestAlertException;
 import com.crypto.daniel.web.rest.util.HeaderUtil;
-import com.crypto.daniel.service.dto.FamilyGroupDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing FamilyGroup.
@@ -32,8 +35,14 @@ public class FamilyGroupResource {
 
     private final FamilyGroupService familyGroupService;
 
-    public FamilyGroupResource(FamilyGroupService familyGroupService) {
+    private final FamilyMemberService familyMemberService;
+
+    private final UserService userService;
+
+    public FamilyGroupResource(FamilyGroupService familyGroupService, FamilyMemberService familyMemberService, UserService userService) {
         this.familyGroupService = familyGroupService;
+        this.familyMemberService = familyMemberService;
+        this.userService = userService;
     }
 
     /**
@@ -84,7 +93,18 @@ public class FamilyGroupResource {
     @GetMapping("/family-groups")
     public List<FamilyGroupDTO> getAllFamilyGroups() {
         log.debug("REST request to get all FamilyGroups");
-        return familyGroupService.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (username.equals("admin")) {
+            return familyGroupService.findAll();
+        } else {
+            User user = userService.getUserWithAuthoritiesByLogin(username).orElse(null);
+            return familyGroupService.findAll().stream()
+                .filter(familyGroupDTO -> familyMemberService.findAll().stream()
+                    .filter(familyMemberDTO -> familyMemberDTO.getFamilyGroups().stream()
+                        .anyMatch(familyGroupDTO1 -> familyGroupDTO1.getId().equals(familyGroupDTO.getId())))
+                    .anyMatch(familyMemberDTO -> familyMemberDTO.getUserId().equals(Objects.requireNonNull(user).getId())))
+                .collect(Collectors.toList());
+        }
     }
 
     /**
