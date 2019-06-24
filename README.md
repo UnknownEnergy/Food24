@@ -6,6 +6,35 @@ The software requirements specification (SRS) can be found [here](https://docs.g
 
 This application was generated using JHipster 5.8.2, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.8.2](https://www.jhipster.tech/documentation-archive/v5.8.2).
 
+## Easy Setup
+
+Requirements: Java 8, Git and Docker
+
+1.)
+
+    git clone https://github.com/UnknownEnergy/Food24.git
+    git pull <-- only if you need the newest version!
+    cd Food24
+    docker-compose -f src/main/docker/app.yml up
+
+2.) Connect to Front-End  
+Open following link inside your browser:  
+http://localhost:8080/
+
+Username: admin  
+Password: admin
+
+Username: user  
+Password: user
+
+3.)
+Connect to Postgres Database
+
+    jdbc:postgresql://localhost:5432/postgres
+
+Username: Food24  
+ Password:
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
