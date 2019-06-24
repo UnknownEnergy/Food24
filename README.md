@@ -30,7 +30,7 @@ Password: user
 3.)
 Connect to Postgres Database
 
-    jdbc:postgresql://localhost:5432/postgres
+    jdbc:postgresql://localhost:5432/Food24
 
 Username: Food24  
  Password:
