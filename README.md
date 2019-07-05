@@ -8,13 +8,16 @@ This application was generated using JHipster 5.8.2, you can find documentation 
 
 ## Easy Setup
 
-Requirements: Java 8, Git and Docker
+Requirements: Java 8, Git and Docker, NPM
 
 1.)
 
     git clone https://github.com/UnknownEnergy/Food24.git
     git pull <-- only if you need the newest version!
     cd Food24
+    npm install @agm/core
+    npm install
+    ./mvnw package -Pprod verify jib:dockerBuild -DskipTests
     docker-compose -f src/main/docker/app.yml up
 
 2.) Connect to Front-End  

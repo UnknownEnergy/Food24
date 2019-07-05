@@ -20,12 +20,12 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let storeItemInstance of storeItemInstances">
-                    <td>
+                    <td *ngIf="storeItemInstance.storeName.includes(location.description)">
                         <div *ngIf="storeItemInstance.storeItemId">
                             <a [routerLink]="['../store-item', storeItemInstance.storeItemId , 'view' ]" >{{storeItemInstance.storeItemName}}</a>
                         </div>
                     </td>
-                    <td>
+                    <td *ngIf="storeItemInstance.storeName.includes(location.description)">
                         {{storeItemInstance.price}} €
                     </td>
                     <!--{{location.stores[0].id + storeItemInstance.storeId}}-->
